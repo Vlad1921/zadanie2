@@ -1,68 +1,23 @@
 package com.company;
 
-import java.io.IOException;
-
-import java.util.*;
-
-class Main {
-
-    public static StringBuffer sortByFrequency(int arr1[], int l1) {
-
-        Map<Integer, Integer> countMap = getCountMap(arr1, l1);
-
-        StringBuffer result = new StringBuffer();
-
-        countMap.entrySet().stream()
-
-                .sorted(Map.Entry.<Integer, Integer> comparingByValue().reversed())
-
-                .forEach(e -> {
-
-                    int key = e.getKey();
-
-                    int val = e.getValue();
-
-                    for (int i = 0; i < val; i++) {
-
-                        result.append(key + " ");
-
-                    }
-
-                });
-
-        return result;
-
+public class Main {
+    public static void main(String[] args) {
+        int[] array = {2, 4, 7, 6, 5, 1, 9, 3, 8};
+        bubbleSort(array);
+        System.out.println(Arrays.toString(array));
     }
 
-    private static Map<Integer, Integer> getCountMap(int[] arr, int l1) {
-
-        Map<Integer, Integer> countMap = new LinkedHashMap<>();
-
-        for (int i = 0; i < l1; i++) {
-
-            if (countMap.containsKey(arr[i])) {
-
-                countMap.put(arr[i], countMap.get(arr[i]) + 1);
-
-            } else {
-
-                countMap.put(arr[i], 1);
-
+    private static void bubbleSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int k = array.length - 1; k > i; k--) {
+                if (array[k - 1] > array[k]) {
+                    int tmp = array[k - 1];
+                    array[k - 1] = array[k];
+                    array[k] = tmp;
+                }
             }
-
         }
-
-        return countMap;
-
     }
-
-    public static void main(String[] args) throws IOException {
-
-        int a[] = { 2, 5, 2, 6, -1, 9999999, 5, 8, 8, 8 };
-
-        System.out.println(sortByFrequency(a, a.length));
-
-    }
-
 }
+
 
